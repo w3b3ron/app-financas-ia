@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Simulador de opções</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #0060DF;outline-offset:2px}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1220px; overflow: hidden; background: #F2F2F7; color: #1C1C1E; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-variant-numeric: tabular-nums">
+<div style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 17px; font-weight: 500; color: #0060DF">
+<svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2L2 10l8 8"/></svg>
+<span>Painel</span>
+</a>
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: #E4E4EA; font-size: 12px; font-weight: 600; color: #4A4A50">Dados de exemplo</span>
+</div>
+
+<div>
+<h1 style="margin: 0; font-size: 34px; line-height: 40px; font-weight: 700; letter-spacing: -0.02em">Simulador</h1>
+<p style="margin: 2px 0 0; font-size: 15px; line-height: 20px; color: #6B6B70">Trava de alta com call · lote de 100 ações</p>
+</div>
+
+<section style="padding: 4px 16px; border-radius: 20px; background: #FFFFFF">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px">
+<div><div style="font-size: 17px; line-height: 22px; font-weight: 600">Compra de call</div><div style="font-size: 13px; line-height: 18px; color: #6B6B70">Strike R$ 30,00</div></div>
+<div style="text-align: right"><div style="font-size: 17px; line-height: 22px; font-weight: 600">−R$ 1,80</div><div style="font-size: 13px; line-height: 18px; color: #6B6B70">prêmio pago</div></div>
+</div>
+<div style="height: 1px; background: #ECECF0"></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px">
+<div><div style="font-size: 17px; line-height: 22px; font-weight: 600">Venda de call</div><div style="font-size: 13px; line-height: 18px; color: #6B6B70">Strike R$ 33,00</div></div>
+<div style="text-align: right"><div style="font-size: 17px; line-height: 22px; font-weight: 600">+R$ 0,60</div><div style="font-size: 13px; line-height: 18px; color: #6B6B70">prêmio recebido</div></div>
+</div>
+<div style="height: 1px; background: #ECECF0"></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px">
+<span style="font-size: 15px; font-weight: 500">Custo da estrutura</span>
+<span style="font-size: 15px; font-weight: 600; text-align: right">R$ 1,20 por ação · R$ 120,00 no lote</span>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="padding: 12px; border-radius: 16px; background: #FFFFFF">
+<div style="font-size: 12px; line-height: 16px; color: #6B6B70">Lucro máximo</div>
+<div style="margin-top: 2px; font-size: 17px; line-height: 22px; font-weight: 600; color: #1B7F3B">+R$ 180,00</div>
+</div>
+<div style="padding: 12px; border-radius: 16px; background: #FFFFFF">
+<div style="font-size: 12px; line-height: 16px; color: #6B6B70">Prejuízo máximo</div>
+<div style="margin-top: 2px; font-size: 17px; line-height: 22px; font-weight: 600; color: #C23B22">−R$ 120,00</div>
+</div>
+<div style="padding: 12px; border-radius: 16px; background: #FFFFFF">
+<div style="font-size: 12px; line-height: 16px; color: #6B6B70">Equilíbrio</div>
+<div style="margin-top: 2px; font-size: 17px; line-height: 22px; font-weight: 600">R$ 31,20</div>
+</div>
+</div>
+
+<section style="padding: 16px; border-radius: 20px; background: #FFFFFF">
+<h2 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 600">Resultado no vencimento</h2>
+<p style="margin: 2px 0 8px; font-size: 13px; line-height: 18px; color: #6B6B70">Lucro ou prejuízo por ação, conforme o preço do ativo</p>
+<svg viewBox="0 0 342 200" role="img" aria-label="Gráfico de resultado da trava de alta: prejuízo máximo de R$ 1,20 abaixo do strike 30, equilíbrio em R$ 31,20 e lucro máximo de R$ 1,80 acima do strike 33" style="display: block; width: 100%; height: auto">
+<polygon points="8,113.3 8,166.3 126.6,166.3 162.1,113.3" fill="#C23B22" fill-opacity="0.14"/>
+<polygon points="162.1,113.3 215.5,33.7 334,33.7 334,113.3" fill="#1B7F3B" fill-opacity="0.14"/>
+<line x1="126.6" y1="16" x2="126.6" y2="186" stroke="#D8D8DE" stroke-dasharray="3 3"/>
+<line x1="215.5" y1="16" x2="215.5" y2="186" stroke="#D8D8DE" stroke-dasharray="3 3"/>
+<line x1="8" y1="113.3" x2="334" y2="113.3" stroke="#8E8E93" stroke-width="1"/>
+<polyline points="8,166.3 126.6,166.3 215.5,33.7 334,33.7" fill="none" stroke="#0A4FA8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="162.1" cy="113.3" r="4.5" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="2"/>
+<line x1="{{mx}}" y1="{{my}}" x2="{{mx}}" y2="113.3" stroke="#0060DF" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="{{mx}}" cy="{{my}}" r="5.5" fill="#0060DF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="334" y="26" text-anchor="end" font-size="12" font-weight="600" fill="#17652F">Lucro máx. +1,80</text>
+<text x="170" y="130" font-size="12" font-weight="600" fill="#1C1C1E">Equilíbrio 31,20</text>
+<text x="8" y="181" font-size="12" font-weight="600" fill="#C23B22">Prejuízo máx. −1,20</text>
+<text x="126.6" y="196" text-anchor="middle" font-size="11" fill="#6B6B70">R$ 30</text>
+<text x="215.5" y="196" text-anchor="middle" font-size="11" fill="#6B6B70">R$ 33</text>
+</svg>
+<div style="margin-top: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<label for="preco" style="font-size: 15px; font-weight: 500">Preço no vencimento</label>
+<span style="font-size: 17px; font-weight: 600">{{priceLabel}}</span>
+</div>
+<input id="preco" type="range" min="26" max="37" step="0.1" value="{{price}}" onChange="{{onSlide}}" style="display: block; width: 100%; height: 44px; margin: 4px 0 0; accent-color: #0060DF">
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 36px; margin-top: 4px; padding-top: 10px; border-top: 1px solid #ECECF0">
+<span style="font-size: 15px; color: #6B6B70">Resultado no lote de 100</span>
+<span aria-live="polite" style="display: inline-flex; align-items: center; gap: 5px; font-size: 20px; line-height: 26px; font-weight: 700; color: {{resultColor}}">
+<sc-if value="{{up}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2l5 8H2z" fill="currentColor"/></svg></sc-if>
+<sc-if value="{{down}}" hint-placeholder-val="{{false}}"><svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 12L2 4h10z" fill="currentColor"/></svg></sc-if>
+<span>{{result}}</span>
+</span>
+</div>
+</div>
+</section>
+
+<section style="padding: 16px; border-radius: 20px; background: #FFFFFF">
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 600">Gregas da estratégia</h2>
+<span style="font-size: 13px; color: #6B6B70">valores de exemplo</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
+<sc-for list="{{greeks}}" as="g" hint-placeholder-count="4">
+<div style="padding: 10px 8px; border-radius: 14px; background: #F2F2F7; text-align: center">
+<div style="font-size: 12px; line-height: 16px; color: #6B6B70">{{g.label}}</div>
+<div style="margin-top: 2px; font-size: 17px; line-height: 22px; font-weight: 600">{{g.value}}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 20px; background: #FFFFFF">
+<div style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 20px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 0"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+<span>Custos de corretagem, emolumentos e imposto ainda não estão incluídos nesta prévia.</span>
+</div>
+<div style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 20px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 0"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+<span>Antes de operar, confira o volume e a diferença entre compra e venda de cada série.</span>
+</div>
+</section>
+
+</div>
+
+<nav aria-label="Navegação principal" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 24px; display: flex; background: rgba(255, 255, 255, 0.92); border-top: 1px solid #D8D8DE; backdrop-filter: blur(20px)">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+<a href="{{t.href}}" aria-current="{{t.current}}" style="flex: 1; min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: {{t.weight}}; color: {{t.color}}">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.d}}"/></svg>
+<span>{{t.label}}</span>
+</a>
+</sc-for>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1220}}'>
+class Component extends DCLogic {
+state = { price: 32 };
+fmt(n) {
+return n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+signed(n) {
+const v = Math.round(n * 100) / 100;
+if (v === 0) return 'R$ 0,00';
+return (v < 0 ? '−' : '+') + 'R$ ' + this.fmt(Math.abs(v));
+}
+renderVals() {
+const s = this.state.price;
+const unit = Math.round((Math.max(s - 30, 0) - Math.max(s - 33, 0) - 1.2) * 100) / 100;
+const total = Math.round(unit * 100 * 100) / 100;
+const mx = Math.round((8 + (s - 26) * 29.636) * 10) / 10;
+const my = Math.round((16 + (2.2 - unit) * 44.21) * 10) / 10;
+const tabDefs = [
+{ label: 'Painel', d: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', href: 'Main.dc.html' },
+{ label: 'Carteira', d: 'M3 8h18v11H3zM8 8V5h8v3', href: '#' },
+{ label: 'Opções', d: 'M3 18h6l5-12h7', href: 'Opcoes.dc.html' },
+{ label: 'Assistente', d: 'M4 5h16v11H9l-5 4z', href: '#' },
+{ label: 'Mais', d: 'M4 12h2M11 12h2M18 12h2', href: '#' },
+];
+const tabs = tabDefs.map((t) => {
+const current = t.label === 'Opções';
+return { ...t, current: current ? 'page' : 'false', color: current ? '#0060DF' : '#6B6B70', weight: current ? 600 : 500 };
+});
+return {
+tabs,
+price: s,
+priceLabel: 'R$ ' + this.fmt(s),
+onSlide: (e) => this.setState({ price: parseFloat(e.target.value) }),
+mx,
+my,
+result: this.signed(total),
+resultColor: total > 0 ? '#1B7F3B' : total < 0 ? '#C23B22' : '#1C1C1E',
+up: total > 0,
+down: total < 0,
+greeks: [
+{ label: 'Delta', value: '+0,31' },
+{ label: 'Gama', value: '0,04' },
+{ label: 'Vega', value: '0,05' },
+{ label: 'Theta', value: '−0,01' },
+],
+};
+}
+}
+</script>
+</body>
+</html>

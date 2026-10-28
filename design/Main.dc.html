@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel da carteira</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid #0060DF;outline-offset:2px}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 940px; overflow: hidden; background: #F2F2F7; color: #1C1C1E; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; font-variant-numeric: tabular-nums">
+<div style="padding: 16px 20px 0; display: flex; flex-direction: column; gap: 16px">
+
+<header style="display: flex; align-items: center; justify-content: space-between">
+<div>
+<h1 style="margin: 0; font-size: 34px; line-height: 40px; font-weight: 700; letter-spacing: -0.02em">Carteira</h1>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 18px; color: #6B6B70">Atualizado às 07:40 · dados de exemplo</p>
+</div>
+<button aria-label="{{toggleLabel}}" aria-pressed="{{hidden}}" onClick="{{toggle}}" style="width: 44px; height: 44px; border: 0; border-radius: 22px; background: #FFFFFF; color: #1C1C1E; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<sc-if value="{{hidden}}" hint-placeholder-val="{{false}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg>
+</sc-if>
+<sc-if value="{{shown}}" hint-placeholder-val="{{true}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+</sc-if>
+</button>
+</header>
+
+<section>
+<p style="margin: 0; font-size: 15px; line-height: 20px; font-weight: 500; color: #6B6B70">Patrimônio total</p>
+<p style="margin: 2px 0 0; font-size: 44px; line-height: 48px; font-weight: 700; letter-spacing: -0.025em">{{total}}</p>
+<p style="margin: 6px 0 0; display: flex; align-items: center; gap: 4px; font-size: 15px; line-height: 20px; font-weight: 600; color: #1B7F3B">
+<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2l5 8H2z" fill="currentColor"/></svg>
+<span>{{dayChange}}</span>
+<span style="font-weight: 400; color: #6B6B70">hoje</span>
+</p>
+</section>
+
+<div>
+<svg viewBox="0 0 342 110" role="img" aria-label="Evolução do patrimônio no último mês, com tendência de alta" style="display: block; width: 100%; height: auto">
+<path d="M0,84 C24,80 40,70 62,72 C86,74 100,58 124,56 C148,54 160,66 184,60 C208,54 220,40 244,38 C268,36 282,26 306,22 L336,16 L336,110 L0,110 Z" fill="#0060DF" fill-opacity="0.08"/>
+<path d="M0,84 C24,80 40,70 62,72 C86,74 100,58 124,56 C148,54 160,66 184,60 C208,54 220,40 244,38 C268,36 282,26 306,22 L336,16" fill="none" stroke="#0060DF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="336" cy="16" r="4.5" fill="#0060DF"/>
+</svg>
+</div>
+
+<div role="group" aria-label="Período" style="display: flex; height: 48px; padding: 2px; border-radius: 14px; background: #E4E4EA">
+<sc-for list="{{periods}}" as="p" hint-placeholder-count="5">
+<button aria-pressed="{{p.on}}" onClick="{{p.pick}}" style="flex: 1; height: 44px; border: 0; border-radius: 12px; font-size: 14px; color: #1C1C1E; cursor: pointer; font-weight: {{p.weight}}; background: {{p.bg}}">{{p.label}}</button>
+</sc-for>
+</div>
+
+<section style="padding: 16px; border-radius: 20px; background: #FFFFFF">
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<h2 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 600">Alocação</h2>
+<span style="font-size: 13px; color: #6B6B70">por classe</span>
+</div>
+<div role="img" aria-label="Ações 42%, FIIs 31%, Stablecoins 17%, Opções 10%" style="display: flex; gap: 2px; height: 12px; margin-top: 12px; border-radius: 6px; overflow: hidden">
+<div style="flex: 42; background: #0A4FA8"></div>
+<div style="flex: 31; background: #4C8FE8"></div>
+<div style="flex: 17; background: #D97B0E"></div>
+<div style="flex: 10; background: #6B6B70"></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; margin-top: 14px">
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #0A4FA8"></span><span>Ações</span><span style="margin-left: auto; font-weight: 600">42%</span></div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #4C8FE8"></span><span>FIIs</span><span style="margin-left: auto; font-weight: 600">31%</span></div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #D97B0E"></span><span>Stablecoins</span><span style="margin-left: auto; font-weight: 600">17%</span></div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #6B6B70"></span><span>Opções</span><span style="margin-left: auto; font-weight: 600">10%</span></div>
+</div>
+</section>
+
+<section style="padding: 16px 16px 4px; border-radius: 20px; background: #FFFFFF">
+<h2 style="margin: 0 0 4px; font-size: 17px; line-height: 24px; font-weight: 600">Para acompanhar</h2>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="3">
+<a href="{{r.href}}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 68px; padding: 10px 0; border-top: {{r.border}}">
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start">
+<div style="display: flex; align-items: baseline; gap: 8px"><span style="font-size: 17px; line-height: 22px; font-weight: 600">{{r.ticker}}</span><span style="font-size: 13px; color: #6B6B70">{{r.kind}}</span></div>
+<span style="display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 11px; font-size: 12px; font-weight: 600; background: {{r.pillBg}}; color: {{r.pillColor}}">{{r.pill}}</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+<span style="font-size: 17px; line-height: 22px; font-weight: 600">{{r.price}}</span>
+<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: {{r.varColor}}">
+<sc-if value="{{r.up}}" hint-placeholder-val="{{true}}"><svg width="10" height="10" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2l5 8H2z" fill="currentColor"/></svg></sc-if>
+<sc-if value="{{r.down}}" hint-placeholder-val="{{false}}"><svg width="10" height="10" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 12L2 4h10z" fill="currentColor"/></svg></sc-if>
+<span>{{r.variation}}</span>
+</span>
+</div>
+</a>
+</sc-for>
+</section>
+
+</div>
+
+<nav aria-label="Navegação principal" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; padding: 6px 8px 24px; display: flex; background: rgba(255, 255, 255, 0.92); border-top: 1px solid #D8D8DE; backdrop-filter: blur(20px)">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+<a href="{{t.href}}" aria-current="{{t.current}}" style="flex: 1; min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: {{t.weight}}; color: {{t.color}}">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.d}}"/></svg>
+<span>{{t.label}}</span>
+</a>
+</sc-for>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":940}}'>
+class Component extends DCLogic {
+state = { hidden: false, period: '1M' };
+renderVals() {
+const hidden = this.state.hidden;
+const period = this.state.period;
+const periods = ['1D', '1S', '1M', '1A', 'Tudo'].map((label) => ({
+label,
+on: period === label,
+bg: period === label ? '#FFFFFF' : 'transparent',
+weight: period === label ? 600 : 500,
+pick: () => this.setState({ period: label }),
+}));
+const tabDefs = [
+{ label: 'Painel', d: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z', href: 'Main.dc.html' },
+{ label: 'Carteira', d: 'M3 8h18v11H3zM8 8V5h8v3', href: '#' },
+{ label: 'Opções', d: 'M3 18h6l5-12h7', href: 'Opcoes.dc.html' },
+{ label: 'Assistente', d: 'M4 5h16v11H9l-5 4z', href: '#' },
+{ label: 'Mais', d: 'M4 12h2M11 12h2M18 12h2', href: '#' },
+];
+const tabs = tabDefs.map((t) => {
+const current = t.label === 'Painel';
+return { ...t, current: current ? 'page' : 'false', color: current ? '#0060DF' : '#6B6B70', weight: current ? 600 : 500 };
+});
+const rows = [
+{ ticker: 'BBAS3', kind: 'Ação · Bancos', price: 'R$ 27,84', variation: '+1,12%', up: true, down: false, varColor: '#1B7F3B', pill: 'Nota 71 · Neutro', pillBg: '#ECECF0', pillColor: '#4A4A50', border: '0' },
+{ ticker: 'HGLG11', kind: 'FII · Logística', price: 'R$ 156,20', variation: '−0,42%', up: false, down: true, varColor: '#C23B22', pill: 'Nota 78 · Atrativo', pillBg: '#E3EEFC', pillColor: '#0A4FA8', border: '1px solid #ECECF0', href: 'Ativo.dc.html' },
+{ ticker: 'USDC', kind: 'Stablecoin', price: 'US$ 0,9998', variation: '+0,01%', up: true, down: false, varColor: '#1B7F3B', pill: 'Paridade normal', pillBg: '#E1F3E7', pillColor: '#17652F', border: '1px solid #ECECF0' },
+];
+return {
+hidden,
+shown: !hidden,
+total: hidden ? 'R$ ••••••' : 'R$ 248.310,45',
+dayChange: hidden ? '+0,75%' : '+R$ 1.842,10 (+0,75%)',
+toggle: () => this.setState({ hidden: !hidden }),
+toggleLabel: hidden ? 'Mostrar valores' : 'Ocultar valores',
+periods,
+tabs,
+rows,
+};
+}
+}
+</script>
+</body>
+</html>
